@@ -7,7 +7,7 @@ const PORT = 3000;
 // Middleware
 // Configure CORS to allow only localhost:5173
 app.use(cors({
-  origin: ['https://teal-beignet-986b62.netlify.app/'],
+  origin: ['https://teal-beignet-986b62.netlify.app'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
