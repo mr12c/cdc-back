@@ -6,11 +6,26 @@ const PORT = 3000;
 
 // Middleware
 // Configure CORS to allow only localhost:5173
+const allowedOrigins = [
+  'https://teal-beignet-986b62.netlify.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: ['https://teal-beignet-986b62.netlify.app'],
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+app.options('*', cors());
+
 app.use(express.json());
 
 // In-memory data store (replace with database in production)
